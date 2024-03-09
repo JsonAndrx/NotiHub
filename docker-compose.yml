@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  notihub:
+    image: image-notihub
+    build: .
+    container_name: notihub
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    depends_on:
+      - postgres-db
+
+  postgres-db:
+    image: postgres:15.3-alpine3.17
+    volumes: 
+      - ./database:/var/lib/postgres/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_HOST=127.0.0.1
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=notihub
