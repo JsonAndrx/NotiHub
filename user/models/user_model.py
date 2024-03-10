@@ -1,5 +1,6 @@
-from sqlalchemy import String, Column, Integer
+from sqlalchemy import String, Column, Integer, DateTime
 from config.database.connect_db import Base
+import datetime
 
 class User(Base):
     __tablename__ = 'users'
@@ -9,5 +10,8 @@ class User(Base):
     first_name = Column(String(25))
     last_name = Column(String(25))
     email = Column(String, unique=True, index=True)
-    password = Column(String(25))
+    password = Column(String(75))
+    phone = Column(String(10))
+    created_at = Column(DateTime, default=datetime.datetime.now())
+    updated_at = Column(DateTime, default=datetime.datetime.now())
 
